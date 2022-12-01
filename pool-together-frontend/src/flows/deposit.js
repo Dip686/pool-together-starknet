@@ -81,7 +81,7 @@ export default function Deposit () {
   // handler for mint function
   const mintFN = async () => {
     const erc20 = new Contract(ERC20StarkToken.abi, '0x052dd98d784ca4e00d38dd0852918d6aaff2b8755c7e458aacef8a38133827b8', provider);
-    const tmpAddress =getChecksumAddress('0x021572Ba688Fa80A0c0888f5D51C94E8EAa8755Ace65C80Cc60162061D2369B4');
+    const tmpAddress =getChecksumAddress(depositorAccountsDetails[0]);
     const tmpNumber = bnToUint256(toBN(33));
 
     const executeHash = await account.execute(
