@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from "@argent/get-starknet";
 import ERC20StarkToken from '../const/ERC20-stark-token.json';
 import { Contract, stark } from "starknet";
-import { toFelt } from 'starknet/utils/number';
+import { toFelt, toBN } from 'starknet/utils/number';
 
 
 /**
@@ -57,10 +57,17 @@ export default function Deposit () {
     console.log('My balance is', toFelt(balanceBeforeTransfer[0].low) / 10 ** 18);
   };
 
+  const mintFN = async () => {
+    const erc20 = new Contract(ERC20StarkToken.abi, '0x052dd98d784ca4e00d38dd0852918d6aaff2b8755c7e458aacef8a38133827b8', provider);
+    const mintVal = await erc20.mint('0x021572Ba688Fa80A0c0888f5D51C94E8EAa8755Ace65C80Cc60162061D2369B4', toBN(33).bn);
+    console.log(mintVal);
+  };
+
   return (
     <>
       <Button colorScheme='green' onClick={createConnection}>Connect</Button>
       <Button colorScheme='green' onClick={() => {console.log(provider, depositorAccountsDetails);}}>Show</Button>
+      <Button colorScheme='green' onClick={mintFN}>Mint</Button>
       <InputGroup size='sm'>
         <Input type='number' value={depositAmount} onChange={handleChange} placeholder='Eg. 100 ETH' />
         <InputRightAddon children='ETH' />
