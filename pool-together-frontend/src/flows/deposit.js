@@ -18,19 +18,21 @@ import { bnToUint256 } from 'starknet/utils/uint256';
 // }
 
 export default function Deposit () {
-  const [depositAmount, setDepositAmount] = React.useState('');
-  const [isFetching, setIsFetching] = React.useState(false);
+  
+  //account controls
   const [isConnected, setIsConnected] = React.useState(false);
   const [isConnecting, setIsConnecting] = React.useState(false);
+
+  //balance controls
+  const [isFetching, setIsFetching] = React.useState(false);
   const [currentBalance, setCurrentBalance] = React.useState('');
+ 
+  // deposit controls
+  const [depositAmount, setDepositAmount] = React.useState('');
   const [depositorAccountsDetails, setDepositorAccountsDetails] = React.useState('');
   const [provider, setProvider] = React.useState('');
 
-  useEffect(() => {
-
-
-  }, []);
-
+  // Handler function for wallet connection
   const createConnection = async () => {
     setIsConnecting(true);
     const starknet = await connect();
@@ -68,11 +70,15 @@ export default function Deposit () {
     setIsFetching(false);
   };
 
+  // handler for deposit function
   const handleDeposit = async () => {}
 
+  // handler for mint function
   const mintFN = async () => {
     const erc20 = new Contract(ERC20StarkToken.abi, '0x052dd98d784ca4e00d38dd0852918d6aaff2b8755c7e458aacef8a38133827b8', provider);
-    const mintVal = await erc20.mint(getChecksumAddress('0x021572Ba688Fa80A0c0888f5D51C94E8EAa8755Ace65C80Cc60162061D2369B4'), bnToUint256(toBN(33)));
+    const tmpAddress =getChecksumAddress('0x021572Ba688Fa80A0c0888f5D51C94E8EAa8755Ace65C80Cc60162061D2369B4');
+    const tmpNumber = bnToUint256(toBN(33));
+    const mintVal = await erc20.mint(tmpAddress, tmpNumber);
     console.log(mintVal);
   };
 
@@ -101,12 +107,12 @@ export default function Deposit () {
               }
             
           </div>
-          {currentBalance && (<><br /><Text>Current balance is: {currentBalance}</Text></>)}
+          {currentBalance && (<><br /><Text>Current balance is: {currentBalance} STARK</Text></>)}
           <br />
           <br />
           <InputGroup size='sm'>
-            <Input type='number' value={depositAmount} onChange={handleChange} placeholder='Eg. 100 ETH' />
-            <InputRightAddon children='ETH' />
+            <Input type='number' value={depositAmount} onChange={handleChange} placeholder='Eg. 100 STARK' />
+            <InputRightAddon children='STARK' />
           </InputGroup>
           <br />
           <Button colorScheme='blue' onClick={handleDeposit} isDisabled={!depositAmount}>Deposit</Button>
