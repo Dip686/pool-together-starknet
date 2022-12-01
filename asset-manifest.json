@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/pool-together-starknet/static/js/main.886dad74.js",
+    "static/js/787.83941324.chunk.js": "/pool-together-starknet/static/js/787.83941324.chunk.js",
+    "index.html": "/pool-together-starknet/index.html",
+    "main.886dad74.js.map": "/pool-together-starknet/static/js/main.886dad74.js.map",
+    "787.83941324.chunk.js.map": "/pool-together-starknet/static/js/787.83941324.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.886dad74.js"
+  ]
+}
